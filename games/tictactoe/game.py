@@ -8,7 +8,7 @@ class Game:
 		self.gameState = GameState(np.array([0,0,0,0,0,0,0,0,0], dtype=np.int), 1)
 		self.actionSpace = np.array([0,0,0,0,0,0,0,0,0], dtype=np.int)
 		self.pieces = {'1':'X', '0': '-', '-1':'O'}
-		self.grid_shape = (3,)
+		self.grid_shape = (3,3)
 		self.input_shape = (2,3,3)
 		self.name = 'metaSquares'
 		self.state_size = len(self.gameState.binary)
@@ -101,12 +101,12 @@ class GameState():
 		if np.count_nonzero(self.board) == 9:
 			return 1
 
-        for x,y,z in self.winners:
+		for x,y,z in self.winners:
 			if (self.board[x] + self.board[y] + self.board[z] == 3 * -self.playerTurn):
 				return 1
 		return 0
 
-def _getValue(self):
+	def _getValue(self):
 		# This is the value of the state for the current player
 		# i.e. if the previous player played a winning move, you lose
 		for x,y,z in self.winners:

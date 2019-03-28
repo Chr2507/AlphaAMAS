@@ -8,7 +8,7 @@ class Game:
 		self.gameState = GameState(np.array([0,0,0,0,0,0,0,0,0], dtype=np.int), 1)
 		self.actionSpace = np.array([0,0,0,0,0,0,0,0,0], dtype=np.int)
 		self.pieces = {'1':'X', '0': '-', '-1':'O'}
-		self.grid_shape = (3,)
+		self.grid_shape = (3,3)
 		self.input_shape = (2,3,3)
 		self.name = 'metaSquares'
 		self.state_size = len(self.gameState.binary)
