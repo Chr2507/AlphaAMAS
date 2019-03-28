@@ -3,7 +3,7 @@ import logging
 
 class Game:
 
-	def __init__(self):		
+	def __init__(self):
 		self.currentPlayer = 1
 		self.gameState = GameState(np.array([0,0,0,0,0,0,0,0,0], dtype=np.int), 1)
 		self.actionSpace = np.array([0,0,0,0,0,0,0,0,0], dtype=np.int)
@@ -27,71 +27,24 @@ class Game:
 		return ((next_state, value, done, info))
 
 	def identities(self, state, actionValues):
-		identities = []
+		identities = [(state,actionValues)]
+
 		currentBoard = state.board
 		currentAV = actionValues
 
-		for n in range(5):
-			currentBoard = np.array([
-						  currentBoard[20], currentBoard[15],currentBoard[10], currentBoard[5],currentBoard[0]
-						, currentBoard[21], currentBoard[16],currentBoard[11], currentBoard[6],currentBoard[1]
-						, currentBoard[22], currentBoard[17],currentBoard[12], currentBoard[7],currentBoard[2]
-						, currentBoard[23], currentBoard[18],currentBoard[13], currentBoard[8],currentBoard[3]
-						, currentBoard[24], currentBoard[19],currentBoard[14], currentBoard[9],currentBoard[4]
-						])
-
-			currentAV = np.array([
-						  currentAV[20], currentAV[15],currentAV[10], currentAV[5],currentAV[0]
-						, currentAV[21], currentAV[16],currentAV[11], currentAV[6],currentAV[1]
-						, currentAV[22], currentAV[17],currentAV[12], currentAV[7],currentAV[2]
-						, currentAV[23], currentAV[18],currentAV[13], currentAV[8],currentAV[3]
-						, currentAV[24], currentAV[19],currentAV[14], currentAV[9],currentAV[4]
-
-						])
-			
-			identities.append((GameState(currentBoard, state.playerTurn), currentAV))
-
 		currentBoard = np.array([
-					  currentBoard[4], currentBoard[3],currentBoard[2], currentBoard[1],currentBoard[0]
-					, currentBoard[9], currentBoard[8],currentBoard[7], currentBoard[6],currentBoard[5]
-					, currentBoard[14], currentBoard[13],currentBoard[12], currentBoard[11],currentBoard[10]
-					, currentBoard[19], currentBoard[18],currentBoard[17], currentBoard[16],currentBoard[15]
-					, currentBoard[24], currentBoard[23],currentBoard[22], currentBoard[21],currentBoard[20]
-					])
+			  currentBoard[2], currentBoard[1],currentBoard[0],
+			  currentBoard[5], currentBoard[4], currentBoard[3],
+			  currentBoard[8], currentBoard[7], currentBoard[6]])
 
 		currentAV = np.array([
-					  currentAV[4], currentAV[3],currentAV[2], currentAV[1],currentAV[0]
-					, currentAV[9], currentAV[8],currentAV[7], currentAV[6],currentAV[5]
-					, currentAV[14], currentAV[13],currentAV[12], currentAV[11],currentAV[10]
-					, currentAV[19], currentAV[18],currentAV[17], currentAV[16],currentAV[15]
-					, currentAV[24], currentAV[23],currentAV[22], currentAV[21],currentAV[20]
+			currentAV[2], currentAV[1],currentAV[0],
+			currentAV[5], currentAV[4], currentAV[3],
+			currentAV[8], currentAV[7], currentAV[6]])
 
-					])
-
-		for n in range(5):
-			currentBoard = np.array([
-						  currentBoard[20], currentBoard[15],currentBoard[10], currentBoard[5],currentBoard[0]
-						, currentBoard[21], currentBoard[16],currentBoard[11], currentBoard[6],currentBoard[1]
-						, currentBoard[22], currentBoard[17],currentBoard[12], currentBoard[7],currentBoard[2]
-						, currentBoard[23], currentBoard[18],currentBoard[13], currentBoard[8],currentBoard[3]
-						, currentBoard[24], currentBoard[19],currentBoard[14], currentBoard[9],currentBoard[4]
-						])
-
-			currentAV = np.array([
-						  currentAV[20], currentAV[15],currentAV[10], currentAV[5],currentAV[0]
-						, currentAV[21], currentAV[16],currentAV[11], currentAV[6],currentAV[1]
-						, currentAV[22], currentAV[17],currentAV[12], currentAV[7],currentAV[2]
-						, currentAV[23], currentAV[18],currentAV[13], currentAV[8],currentAV[3]
-						, currentAV[24], currentAV[19],currentAV[14], currentAV[9],currentAV[4]
-
-						])
-
-			identities.append((GameState(currentBoard, state.playerTurn), currentAV))
+		identities.append((GameState(currentBoard, state.playerTurn), currentAV))
 
 		return identities
-
-
-
 
 class GameState():
 	def __init__(self, board, playerTurn):
@@ -222,7 +175,7 @@ class GameState():
 					tilenum = tilenum + 1
 				if checkFlag == 0:
 					currentPlayerPoints = currentPlayerPoints + points
-					
+
 		opponentPlayerPoints = 0
 		for squareType in self.winners:
 			points = squareType['points']
@@ -260,12 +213,9 @@ class GameState():
 			value = newState.value[0]
 			done = 1
 
-		return (newState, value, done) 
+		return (newState, value, done)
 
 	def render(self, logger):
 		for r in range(5):
 			logger.info([self.pieces[str(x)] for x in self.board[5*r : (5*r + 5)]])
 		logger.info('--------------')
-
-
-
