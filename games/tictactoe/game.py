@@ -10,7 +10,7 @@ class Game:
 		self.pieces = {'1':'X', '0': '-', '-1':'O'}
 		self.grid_shape = (3,3)
 		self.input_shape = (2,3,3)
-		self.name = 'metaSquares'
+		self.name = 'tictactoe'
 		self.state_size = len(self.gameState.binary)
 		self.action_size = len(self.actionSpace)
 
