@@ -205,8 +205,13 @@ class Agent():
 		plt.plot(self.train_policy_loss, 'm--')
 
 		plt.legend(['train_overall_loss', 'train_value_loss', 'train_policy_loss'], loc='upper right')
-		plt.xlabel('Iteration number')
-		plt.ylabel('Loss value')
+		plt.xlabel('Mini-bactch iteration number')
+		plt.ylabel('Loss')
+
+		if len(self.train_overall_loss) % 100 == 0:
+			name= 'run/loss'+str(len(self.train_overall_loss))+'.png'
+			plt.savefig(name)
+
 
 		display.clear_output(wait=True)
 		display.display(pl.gcf())
